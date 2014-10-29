@@ -5,12 +5,13 @@
 // and used for the same purpose of easier testing.
 angular.module('firebase.utils', ['firebase', 'jetgrizzlyApp'])
 .factory('fbutil', function(config, $window, $firebase){
+  var ref;
   var firebaseRef = function(link) {
   	if (link) {
-    	var ref = new $window.Firebase(config.firebase.url + link);
+    	ref = new $window.Firebase(config.firebase.url + link);
     	return ref;
     } else {
-    	var ref = new $window.Firebase(config.firebase.url);
+    	ref = new $window.Firebase(config.firebase.url);
   		return ref;
   	}
   };
