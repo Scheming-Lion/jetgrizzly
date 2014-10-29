@@ -10,11 +10,18 @@ var http = require('http');
 var youtubeData = 'http://gdata.youtube.com/feeds/api/videos/';
 var youtubeQueryParams = '?v=2&alt=jsonc';
 
-var config = {firebase:{url:'https://room-test.firebaseio.com'}};
-var queueRef; //= new Firebase(config.firebase.url+'/queue/');
-var videoRef; //= new Firebase(config.firebase.url+'/youTube/');
 
-var getVideoData = function(video,cb){
+var server = require('http').createServer(app);
+// start server
+server.listen(port, ip, function () {
+  console.log('Express server listening on %d!', port);
+});  
+// var config = {firebase:{url:'https://blistering-heat-6745.firebaseio.com'}};
+var config = {firebase:{url:'https://scheming-lions.firebaseio.com'}};
+var queueRef = new Firebase(config.firebase.url+'/queue/');
+var videoRef = new Firebase(config.firebase.url+'/youTube/');
+
+var getVideoData = function(video, cb){
   http.get(youtubeData + video + youtubeQueryParams,function(res){
     var ret = '';
     res.on('data', function(chunk) {
