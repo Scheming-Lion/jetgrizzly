@@ -1,20 +1,21 @@
 <div class="container text-center">
   <br/>
-  <form ng-submit="registerUser(user.email, user.password)" roll='form'>
+  <form ng-submit="registerUser(user.email, user.password)" roll='form' name='registerForm'>
     <div class="row">
       <br/>
       <h1>Registration</h1>
       <br/>
       <label for="email">Simply your email and a password.</label>
-      <input class='form-control' id='email' type="email" ng-model="user.email" placeholder="Email">
+      <input class='form-control' type="email" name='email' ng-model="user.email" placeholder="Email" required>
+   <!--    <p class="help-block" ng-show="registerForm.email.$invalid && !userForm.name.$pristine">Not a valid email address.</p> -->
     </div>
     <div class="row">
       <br/>
-      <input class='form-control' type="password" ng-model="user.password" placeholder="Password">
+      <input class='form-control' type="password" ng-model="user.password" placeholder="Password" required>
     </div>
     <div class="row">
       <br/>
-      <input class='btn btn-default' type="submit" value="Register"/>
+      <input ng-disabled='registerForm.$invalid' class='btn btn-default' type="submit" value="Register"/>
     </div>
   </form>
 </div>
