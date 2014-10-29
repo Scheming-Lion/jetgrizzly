@@ -16,6 +16,7 @@ angular.module('jetgrizzlyApp')
     // console.log(currentRoom);
     
     var queueRef = new $window.Firebase(config.firebase.url+'/rooms/'+currentRoom+'/queue/');
+
     var sync = $firebase(queueRef);
     $scope.queue = sync.$asArray();
 

@@ -26,7 +26,6 @@ var getVideoData = function(video,cb){
 var stopped = true;
 var roomID;
 
-// LOOK HERE!!!!
 var handleNextQueueItem = function(queueSnapshot){
   console.log('The value of the queue is');
   var queue = queueSnapshot.val();

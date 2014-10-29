@@ -27,10 +27,8 @@ app.get('/:id', function(request, response) {
   response.render('index', { currentRoom: request.params.id });
 });
 
-
 app.get('/', function(request, response) {
   response.redirect('/lobby');
-});
 
 var server = require('http').createServer(app);
 // start server
