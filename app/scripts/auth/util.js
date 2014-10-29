@@ -10,8 +10,8 @@ angular.module('firebase.utils', ['firebase', 'jetgrizzlyApp'])
     	var ref = new $window.Firebase(config.firebase.url + link);
     	return ref;
     } else {
-    	var ref = new $window.Firebase(config.firebase.url);
-  		return ref;
+    	var ref2 = new $window.Firebase(config.firebase.url);
+  		return ref2;
   	}
   };
 	return {

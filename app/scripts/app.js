@@ -22,19 +22,22 @@ angular.module('jetgrizzlyApp', [
   $urlRouterProvider.otherwise('/');
   $stateProvider.state('app',{
     abstract:true,
-    templateUrl:'views/main.html',
+    templateUrl:'app/views/main.html',
     resolve: {
       user : function(SimpleLogin){
         return SimpleLogin.getUser();
       }
     },
-    controller:function($scope,user, SimpleLogin){
+    controller:function($scope,user, SimpleLogin, $firebase, $window, config){
       $scope.user = user;
+      // var roomsRef = new $window.Firebase(config.firebase.url+'/rooms/');
+      // var sync = $firebase(roomsRef);
+      // $scope.rooms = sync.$asObject();
     }
   });
 })
 .factory('config',function(){
   return {
-    firebase:{url:'https://blistering-heat-6745.firebaseio.com'}
+    firebase:{url:'https://room-test.firebaseio.com'}
   };
 });
