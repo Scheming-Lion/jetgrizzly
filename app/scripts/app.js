@@ -30,9 +30,11 @@ angular.module('jetgrizzlyApp', [
     },
     controller:function($scope,user, SimpleLogin, $firebase, $window, config){
       $scope.user = user;
-      // var roomsRef = new $window.Firebase(config.firebase.url+'/rooms/');
-      // var sync = $firebase(roomsRef);
-      // $scope.rooms = sync.$asObject();
+      $scope.currentRoom = window.currentRoom;
+      // console.log($scope.currentRoom);
+      var roomsRef = new $window.Firebase(config.firebase.url+'/rooms/');
+      var sync = $firebase(roomsRef);
+      $scope.rooms = sync.$asObject();
     }
   });
 })
