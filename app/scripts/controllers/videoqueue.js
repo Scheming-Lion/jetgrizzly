@@ -21,6 +21,10 @@ angular.module('jetgrizzlyApp')
     var sync = $firebase(queueRef);
     $scope.queue = sync.$asArray();
 
+    var currentVideoRef = new $window.Firebase(config.firebase.url+'/youTube/');
+    var syncCurrentVideo = $firebase(currentVideoRef);
+    $scope.currentVideo = syncCurrentVideo.$asObject();
+
     // listen for new users to lobby (emitted from UserPresenceFactory)
     $scope.$on('onOnlineUser', function() {
       $scope.$apply(function() {
@@ -35,9 +39,19 @@ angular.module('jetgrizzlyApp')
         console.log('scope.item', $scope.item);
         $scope.item = '';
         $scope.queueForm.$setPristine();
-        console.log('Queue size: '+$scope.queue.length+'; Player is in state: '+ $scope.playerState);
-        console.log('from line 35', item);
-        console.log('scope queue', $scope.queue)
+        console.log('your video has been added to the queue');
+        // if the queue is empty, we are going to make this video the currently playing with
+        // the following properties: currentVideo, isPlaying, startTime;  
+        if($scope.currentVideo.currentVideo === undefined){
+          var sliceIndex = $scope.queue[0].item.indexOf('='); 
+          $scope.currentVideo.currentVideo = $scope.queue[0].item.slice(sliceIndex+1);
+          $scope.currentVideo.isPlaying = true;
+          $scope.currentVideo.startTime = new Date(); 
+          console.log($scope.currentVideo);
+          $scope.currentVideo.$save().then(function(){
+            console.log('the queue was empty and now your track will start');
+          })
+        }
       });
     };
 
