@@ -5,9 +5,10 @@ var module = angular.module('jetgrizzlyApp.Room', ['ui.router']).config(function
   $stateProvider.state('lobby', {
     url: '/',
     parent: 'app',
-    templateUrl: 'views/room/room.html',
+    templateUrl: 'app/views/room/room.html',
     controller: function ($scope, user) {
       $scope.user = user;
+      $scope.room = 'lobby';
     }
   });
 })
