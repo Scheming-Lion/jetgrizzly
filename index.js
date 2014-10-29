@@ -156,6 +156,19 @@ app.set('views', __dirname + '/client');
 
 app.use(express.static(__dirname + '/client'));
 
+<<<<<<< HEAD
+=======
+app.get('/:id', function(request, response) {
+  // console.log("id: " + request.params.id);
+
+  job.updateQueueWatcher(request.params.id);
+  job.checkCurrentVideo();
+
+  response.render('index', { currentRoom: request.params.id });
+});
+
+
+>>>>>>> (feat) logic to handle rooms in place.
 app.get('/', function(request, response) {
   response.redirect('/lobby');
 });
