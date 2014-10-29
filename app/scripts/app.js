@@ -31,7 +31,6 @@ angular.module('jetgrizzlyApp', [
     controller:function($scope,user, SimpleLogin, $firebase, $window, config, userRoom){
       $scope.user = user;
       $scope.currentRoom = window.currentRoom;
-      userRoom.setRoom($scope.currentRoom);
       // console.log($scope.currentRoom);
       var roomsRef = new $window.Firebase(config.firebase.url+'/rooms/');
       var sync = $firebase(roomsRef);
