@@ -1,5 +1,50 @@
-<h2> Welcome to your account page: {{user.email}}</h2>
+
 
 <!-- Check if student is in the database as a user -->
 <!-- If not, load the form to add more info -->
  <!-- If so, load their account info -->
+
+<div class="container text-center">
+  <br/>
+  <form ng-submit="update()" roll='form'>
+    <div class="row">
+      <br/>
+      <h1>Welcome to your account page: {{user.email}}</h1>
+      <br/>
+      <label for="email">Nice to see you again!</label>
+      <input type="email" class="form-control" ng-model="user.email" placeholder="Email">
+    </div>
+    <div class="row">
+      <br/>
+      <input type="text" class="form-control" ng-model="user.firstName" placeholder="first name">
+    </div>
+    <div class="row">
+      <br/>
+      <input type="text" class="form-control" ng-model="user.lastName" placeholder="last name">
+    </div>
+    <div class="row">
+      <br/>
+      <input type="text" class="form-control" ng-model="user.dinosaur" placeholder="favorite dinosaur">
+    </div>
+    <div class="row">
+      <br/>
+      <input type="text" class="form-control" ng-model="user.birthday" placeholder="Birthday">
+    </div>
+    <div class="row">
+      <br/>
+      <input type="text" class="form-control" ng-model="user.muffin" placeholder="Would you like your muffin buttered?">
+    </div>
+    <div class="row">
+      <br/>
+      <input type="text" class="form-control" ng-model="user.ssn" placeholder="Social Security #">
+    </div>
+    <div class="row">
+      <br/>
+      <input type="text" class="form-control" ng-model="user.bitcoin" placeholder="private bitcoin wallet address">
+    </div>
+    <div class="row">
+      <br/>
+      <input type="submit" class="btn btn-default" value="UPDATE"></input>
+    </div>
+  </form>
+</div>
