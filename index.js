@@ -156,6 +156,10 @@ app.set('views', __dirname + '/client');
 
 app.use(express.static(__dirname + '/client'));
 
+app.get('/', function(request, response) {
+  response.redirect('/lobby');
+});
+
 app.get('/:id', function(request, response) {
   // console.log("id: " + request.params.id);
 
@@ -165,9 +169,6 @@ app.get('/:id', function(request, response) {
   response.render('index', { currentRoom: request.params.id });
 });
 
-app.get('/', function(request, response) {
-  response.redirect('/lobby');
-});
 
 // expose app
 exports = module.exports = app;

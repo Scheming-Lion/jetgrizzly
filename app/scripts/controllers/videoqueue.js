@@ -12,6 +12,7 @@ angular.module('jetgrizzlyApp')
   .controller('VideoQueueController', ['$rootScope', '$scope', 'userPresence', '$window', 'config', '$firebase', function ($rootScope, $scope, userPresence, $window, config, $firebase) {
     // declare variables
     $scope.totalUsers = 0;
+    var currentRoom = $scope.$parent.room;
 
     var currentRoom = $scope.$parent.currentRoom;
     // console.log(currentRoom);

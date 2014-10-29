@@ -23,7 +23,6 @@ angular.module('jetgrizzlyApp')
     // listen to value changes on firebase to resolve the promise when video changes
     youtubeRef.on('value', function(snapshot){
       var data = snapshot.val();
-
       console.log('data: ' + data);
       if (data === null) {
         var sync = $firebase(youtubeRef);
