@@ -150,9 +150,9 @@ $table-border-color:            #ddd !default;
 //
 //## For each of Bootstrap's buttons, define text, background and border color.
 
-$btn-font-weight:                normal !default;
+$btn-font-weight:                bold !default;
 
-$btn-default-color:              #333 !default;
+$btn-default-color:              #gray-lighter !default;
 $btn-default-bg:                 $kuler-third;
 $btn-default-border:             #ccc !default;
 
@@ -186,10 +186,10 @@ $btn-link-disabled-color:        $gray-light !default;
 //** `<input>` background color
 $input-bg:                       $kuler-second !default;
 //** `<input disabled>` background color
-$input-bg-disabled:              $gray-lighter !default;
+$input-bg-disabled:              $gray !default;
 
 //** Text color for `<input>`s
-$input-color:                    $gray !default;
+$input-color:                    $gray-lighter !default;
 //** `<input>` border color
 $input-border:                   #ccc !default;
 //** `<input>` border radius
