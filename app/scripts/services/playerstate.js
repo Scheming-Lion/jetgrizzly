@@ -14,6 +14,7 @@ angular.module('jetgrizzlyApp')
     console.log('current room: ' + currentRoom);
 
     var youtubeRef = new $window.Firebase(config.firebase.url+'/rooms/'+currentRoom+'/youTube');
+
     var currentVideoObject  = {isPlaying:false,currentVideo:''};
 
     // video change is deferred so that player plays next when appropiate
@@ -25,7 +26,6 @@ angular.module('jetgrizzlyApp')
       var data = snapshot.val();
 
       console.log('data: ' + data);
-
       if (data === null) {
         var sync = $firebase(youtubeRef);
         var newYouTubeRef = sync.$asObject();

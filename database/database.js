@@ -107,6 +107,3 @@ module.exports.checkCurrentVideo = function(){
   });
 
 };
-
-// this is a function that calls itself to check for video status
-// module.exports.checkCurrentVideo();
