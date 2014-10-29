@@ -18,9 +18,18 @@ app.set('views', __dirname + '/app');
 
 app.use(express.static(__dirname));
 
-app.get('/', function(request, response) {
+app.get('/:id', function(request, response) {
+  // console.log("id: " + request.params.id);
+
+  job.updateQueueWatcher(request.params.id);
   job.checkCurrentVideo();
-  response.render('index');
+
+  response.render('index', { currentRoom: request.params.id });
+});
+
+
+app.get('/', function(request, response) {
+  response.redirect('/lobby');
 });
 
 var server = require('http').createServer(app);
