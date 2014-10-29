@@ -1,5 +1,8 @@
-<form ng-submit="registerUser(user.email, user.password)">
-  <input type="email" ng-model="user.email" placeholder="Email">
-  <input type="password" ng-model="user.password" placeholder="Password">
-  <input type="submit" value="Register"/>
-</form>
+<div class="container text-center">
+  <br/>
+  <form ng-submit="registerUser(user.email, user.password)">
+    <input class='form-control' type="email" ng-model="user.email" placeholder="Email">
+    <input class='form-control' type="password" ng-model="user.password" placeholder="Password">
+    <input class='btn btn-default' type="submit" value="Register"/>
+  </form>
+</div>
