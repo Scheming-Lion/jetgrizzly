@@ -1,4 +1,4 @@
-    'use strict';
+      'use strict';
 /*jshint -W079 */
 (function(){
 var module = angular.module('jetgrizzlyApp.Auth', ['firebase.utils', 'ui.router', 'firebase']);
@@ -33,6 +33,7 @@ module.controller('LoginController', function ($scope, SimpleLogin, $state, $sta
           reload: true
         });
       }, function(err) {
+        // Add real user feedback here.
         console.log('Wrong email or password!');
       });
   };
@@ -48,6 +49,7 @@ module.controller('RegisterController', function ($scope, $state, SimpleLogin, $
           reload: true
         });
       }, function(err) {
+        // Provide real feedback to user
         console.log('Email already taken!');
       });
   };
@@ -89,13 +91,31 @@ module.factory('SimpleLogin', ['fbutil', '$timeout', '$window', '$firebaseSimple
       // id is returned as a promise object (convenient to use for tests)
       return id;
     },
+    saveUserEmail: function(email) {
+      // Just log the user's email
+      // When the user updates the profile later,
+      // we can check if email.firstName exists
+      // to decide if the user should add their basic info
+      // or not. This way, we're not just storing a bunch
+      // of null values to begin with.
+      var refAddUser = new $window.Firebase(config.firebase.url +'/user/');
+      var emptyProfileInfo = {
+        email: {}
+      };
+      refAddUser.set(emptyProfileInfo, function onComplete(){
+        console.log('Save user email to database for future profile use');
+      });
+
+    },
     createAccount: function(email, pass) {
+      // save email for profile reference
+      saveUserEmail(email);
       // createUser function of angularfire
       return auth.$createUser(email, pass)
         .then(function() {
           return functions.login(email, pass);
         });
-    },
+    }
   };
   // listens for a click of login or logout and then checks if user exists
   $rootScope.$on('firebaseSimpleLogin:login', statusChange);
