@@ -6,12 +6,14 @@
       <h1>Registration</h1>
       <br/>
       <label for="email">Simply your email and a password.</label>
-      <input class='form-control' type="email" name='email' ng-model="user.email" placeholder="Email" required>
-   <!--    <p class="help-block" ng-show="registerForm.email.$invalid && !userForm.name.$pristine">Not a valid email address.</p> -->
+      <input class='form-control' type='email' name='email' ng-model='user.email' placeholder='Email' required>
+      <p class="help-block" ng-show="registerForm.email.$invalid && !registerForm.email.$pristine">Not a valid email address.</p>
     </div>
     <div class="row">
       <br/>
-      <input class='form-control' type="password" ng-model="user.password" placeholder="Password" required>
+      <input name='password' class='form-control' type="password" ng-model="user.password" placeholder="Password" ng-minlength="5" ng-maxlength="20" required>
+      <p ng-show="registerForm.password.$error.minlength && !registerForm.password.$pristine" class="help-block">Password is too short. (5 characters, minimum!)</p>
+      <p ng-show="registerForm.password.$error.maxlength && !registerForm.password.$pristine" class="help-block">Password is too long. (20 characters, max!)</p>
     </div>
     <div class="row">
       <br/>
