@@ -98,18 +98,24 @@ module.factory('SimpleLogin', ['fbutil', '$timeout', '$window', '$firebaseSimple
       // to decide if the user should add their basic info
       // or not. This way, we're not just storing a bunch
       // of null values to begin with.
-      var refAddUser = new $window.Firebase(config.firebase.url +'/user/');
-      var emptyProfileInfo = {
-        email: {}
+      var ref = new $window.Firebase('https://scheming-lions.firebaseio.com');
+      var usersRef = ref.child('users');
+      // var emptyProfileInfo = {
+      //   email: {}
+      // };
+      // emptyProfileInfo
+      var userDBEntry = {};
+      var regXFilterForPeriod = /\./g;
+      // Firebase will not take periods in the key
+      var emailWithoutPeriod = email.replace(regXFilterForPeriod, '');
+      userDBEntry[emailWithoutPeriod] = {
+        'email': email
       };
-      refAddUser.set(emptyProfileInfo, function onComplete(){
-        console.log('Save user email to database for future profile use');
-      });
-
+      usersRef.set(userDBEntry);
     },
     createAccount: function(email, pass) {
       // save email for profile reference
-      saveUserEmail(email);
+      this. saveUserEmail(email);
       // createUser function of angularfire
       return auth.$createUser(email, pass)
         .then(function() {
