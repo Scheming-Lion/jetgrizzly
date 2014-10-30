@@ -14,9 +14,9 @@ app.set('view engine', 'html');
 
 // tells the application where to go to find the views so that they can
 // be rendered.
-app.set('views', __dirname + '/app');
+app.set('views', __dirname + '/client');
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/client'));
 
 app.get('/:id', function(request, response) {
   // console.log("id: " + request.params.id);

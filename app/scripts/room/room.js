@@ -5,7 +5,7 @@ var module = angular.module('jetgrizzlyApp.Room', ['ui.router']).config(function
   $stateProvider.state('lobby', {
     url: '/',
     parent: 'app',
-    templateUrl: 'app/views/room/room.html',
+    templateUrl: 'views/room/room.html',
     controller: function ($scope, user, playerState) {
       $scope.user = user;
       $scope.currentRoom = $scope.$parent.currentRoom;
