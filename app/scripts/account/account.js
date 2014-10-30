@@ -3,7 +3,7 @@
 // does not do much now, but provide a template/page for user account information
 (function(){
 
-var module = angular.module('jetgrizzlyApp.Account',['ui.router']);
+var module = angular.module('jetgrizzlyApp.Account',['ui.router','firebase']);
 
 module.config(function($stateProvider) {
   $stateProvider.state('account', {
@@ -15,12 +15,14 @@ module.config(function($stateProvider) {
 
 });
 
-module.controller('AccountController', function ($scope, user, updateData, $window) {
+module.controller('AccountController', function ($scope, $firebase, user, updateData, $window) {
   var userEmail = user.email.replace(/@/g,'%40').replace(/\./g,''); //get rid of the .
-  var ref = new $window.Firebase('https://scheming-lions.firebaseio.com/users/' + userEmail);
-  $scope.user.firstName = ref.firstName || null;
-
+  var ref = new Firebase('https://scheming-lions.firebaseio.com/users/' + userEmail);
+  var sync = $firebase(ref);
+  $scope.data = sync.$asObject();
+  $scope.email = $scope.data.email;
   $scope.user = user;
+  $scope.user.firstName = ref.firstName || null;
   $scope.update = function(email, firstName, lastName, dinosaur, bday, muffin, ssn, bitcoin) {
     updateData.saveUserData(email, firstName, lastName, dinosaur, bday, muffin, ssn, bitcoin);
   };
@@ -34,7 +36,7 @@ module.factory('updateData', ['fbutil', '$timeout', '$window', '$rootScope', fun
       var userEmail = email.replace(/@/g,'%40').replace(/\./g,''); //get rid of the .
       var ref = new $window.Firebase('https://scheming-lions.firebaseio.com/users/' + userEmail);
       var userData= {
-        firsName: firstName,
+        firstName: firstName,
         lastName: lastName,
         dinosaur: dinosaur,
         bday: bday,
