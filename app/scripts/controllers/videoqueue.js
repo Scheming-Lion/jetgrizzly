@@ -40,18 +40,6 @@ angular.module('jetgrizzlyApp')
         $scope.item = '';
         $scope.queueForm.$setPristine();
         console.log('your video has been added to the queue');
-        // if the queue is empty, we are going to make this video the currently playing with
-        // the following properties: currentVideo, isPlaying, startTime;  
-        if($scope.currentVideo.currentVideo === undefined){
-          var sliceIndex = $scope.queue[0].item.indexOf('='); 
-          $scope.currentVideo.currentVideo = $scope.queue[0].item.slice(sliceIndex+1);
-          $scope.currentVideo.isPlaying = true;
-          $scope.currentVideo.startTime = new Date(); 
-          console.log($scope.currentVideo);
-          $scope.currentVideo.$save().then(function(){
-            console.log('the queue was empty and now your track will start');
-          })
-        }
       });
     };
 

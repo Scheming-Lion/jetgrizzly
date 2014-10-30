@@ -20,10 +20,13 @@ server.listen(port, ip, function () {
 ////////////////////////////////////////////
 // NEED TO CHANGE THIS DATABASE LINK HERE 
 // var config = {firebase:{url:'https://blistering-heat-6745.firebaseio.com'}};
+// ORIGINAL: var config = {firebase:{url:'https://blistering-heat-6745.firebaseio.com'}};
+// TEST: var config = {firebase:{url:'https://scheming-lion2.firebaseio.com'}};
+///////////////////////////////////////////
+
+
 
 var config = {firebase:{url:'https://scheming-lions.firebaseio.com'}};
-
-
 var queueRef = new Firebase(config.firebase.url+'/queue/');
 var videoRef = new Firebase(config.firebase.url+'/youTube/');
 
@@ -56,14 +59,19 @@ var handleNextQueueItem = function(queueSnapshot){
       // wait for next item in queue to continue looping.
       stopped = true;
     });
-  }else{
+  } else{
     console.log('OK there is a video in the queue so lets use it.');
-    var nextID = queueSnapshot.val().split('v=')[1];
+    var nextID = queueSnapshot.val().item.split('v=')[1];
+    console.log('nextID ', nextID);
     var nextName = queueSnapshot.name();
+<<<<<<< HEAD
 <<<<<<< HEAD
     videoRef.set({currentVideo:nextID,isPlaying:true,startTime:Date.now()},function(){
       var remove = new Firebase(config.firebase.url+'/rooms/'+roomID+'/queue/'+nextName);
 =======
+=======
+    console.log('next name ', nextName);
+>>>>>>> (FEAT) Voting working as expected, videos loading correctly.  Need to connect voting with the profiles & actual voting logic.
     videoRef.set({currentVideo: nextID, isPlaying: true, startTime: Date.now()}, function(){
       var remove = new Firebase(config.firebase.url+'/queue/'+nextName);
 >>>>>>> (FEAT) If the queue is playing, loading next video.  Still need to play next video after video ends.
@@ -111,7 +119,7 @@ var checkCurrentVideo = function(){
 =======
     if(currentVideo.currentVideo === ""){
       console.log('Video is nothing now');
-      queueRef.startAt().limit(1).once('child_added',handleNextQueueItem);
+      queueRef.startAt().limit(1).once('child_added', handleNextQueueItem);
       return;
     }
 
