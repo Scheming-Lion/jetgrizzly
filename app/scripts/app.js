@@ -28,9 +28,10 @@ angular.module('jetgrizzlyApp', [
         return SimpleLogin.getUser();
       }
     },
-    controller:function($scope,user, SimpleLogin, $firebase, $window, config){
+    controller:function($scope,user, SimpleLogin, $firebase, $window, config, userRoom){
       $scope.user = user;
       $scope.currentRoom = window.currentRoom;
+      userRoom.setRoom($scope.currentRoom);
       // console.log($scope.currentRoom);
       var roomsRef = new $window.Firebase(config.firebase.url+'/rooms/');
       var sync = $firebase(roomsRef);
@@ -41,5 +42,16 @@ angular.module('jetgrizzlyApp', [
 .factory('config',function(){
   return {
     firebase:{url:'https://room-test.firebaseio.com'}
+  };
+})
+.factory('userRoom', function() {
+  var room = '';
+  return {
+    setRoom: function(newRoom) {
+      room = newRoom;
+    },
+    getRoom: function() {
+      return room;
+    }
   };
 });

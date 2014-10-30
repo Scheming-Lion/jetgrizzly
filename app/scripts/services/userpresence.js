@@ -8,11 +8,12 @@
  * Factory in the jetgrizzlyApp.
  */
 angular.module('jetgrizzlyApp')
-  .factory('userPresence', ['$rootScope','config', function($rootScope,config) {
+  .factory('userPresence', ['$rootScope','config', 'userRoom', function($rootScope,config,userRoom) {
     var onlineUsers = 0;
 
     // create firebase references
-    var listRef = new window.Firebase(config.firebase.url+'/presence/');
+    var currentRoom = userRoom.getRoom();
+    var listRef = new window.Firebase(config.firebase.url+'/rooms/'+currentRoom+'/presence/');
     var userRef = listRef.push(); 
     var presenceRef = new window.Firebase(config.firebase.url+'/.info/connected');
 

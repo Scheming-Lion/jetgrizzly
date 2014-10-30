@@ -24,7 +24,7 @@ angular.module('jetgrizzlyApp')
 
     return {
       getYT: function() {
-        return d.promise; 
+        return d.promise;
       }
     };
   });

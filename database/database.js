@@ -22,7 +22,11 @@ var getVideoData = function(video,cb){
     });
   });
 };
+
 var stopped = true;
+var roomID;
+
+// LOOK HERE!!!!
 var handleNextQueueItem = function(queueSnapshot){
   console.log('The value of the queue is');
   var queue = queueSnapshot.val();
@@ -38,7 +42,7 @@ var handleNextQueueItem = function(queueSnapshot){
     var nextID = queueSnapshot.val().split('v=')[1];
     var nextName = queueSnapshot.name();
     videoRef.set({currentVideo:nextID,isPlaying:true,startTime:Date.now()},function(){
-      var remove = new Firebase(config.firebase.url+'/queue/'+nextName);
+      var remove = new Firebase(config.firebase.url+'/rooms/'+roomID+'/queue/'+nextName);
       remove.remove(function(){
         console.log('removed top vid from queue');
         // wait for this to end to finish looping.
@@ -50,6 +54,8 @@ var handleNextQueueItem = function(queueSnapshot){
 };
 
 module.exports.updateQueueWatcher = function(id) {
+  roomID = id;
+
   queueRef = new Firebase(config.firebase.url+'/rooms/'+id+'/queue/');
   videoRef = new Firebase(config.firebase.url+'/rooms/'+id+'/youTube/');
   
@@ -84,6 +90,8 @@ module.exports.checkCurrentVideo = function(){
       getVideoData(currentVideo.currentVideo,function(res){
         var endTime = currentVideo.startTime+res.data.duration*1000;
         var remaining = endTime - Date.now();
+
+        console.log('remaning: ' + remaining);
 
         if(remaining < 0){
           // handle the next item on the queue if any
