@@ -49,6 +49,10 @@ var getVideoData = function(video, cb){
 var stopped = true;
 var roomID;
 
+<<<<<<< HEAD:index.js
+=======
+// LOOK HERE!!!!
+>>>>>>> (feat) queue resumes with next video on deck.:database/database.js
 var handleNextQueueItem = function(queueSnapshot){
   console.log('The value of the queue is');
   var queue = queueSnapshot.val();
@@ -77,7 +81,11 @@ var handleNextQueueItem = function(queueSnapshot){
   }
 };
 
+<<<<<<< HEAD:index.js
 var updateQueueWatcher = function(id) {
+=======
+module.exports.updateQueueWatcher = function(id) {
+>>>>>>> (feat) queue resumes with next video on deck.:database/database.js
   roomID = id;
 
   queueRef = new Firebase(config.firebase.url+'/rooms/'+id+'/queue/');
