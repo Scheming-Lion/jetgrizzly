@@ -17,7 +17,12 @@
     </div>
     <div class="row">
       <br/>
-      <input ng-disabled='registerForm.$invalid' class='btn btn-default' type="submit" value="Register"/>
+      <input ng-class='$h1' ng-disabled='registerForm.$invalid' class='btn btn-default' type="submit" value="Register"/>
+    </div>
+    <div class="row help-block" ng-hide='success'>
+      <br/>
+      <p>This email is already registered.</p>
+      <p>Please use another.</p>
     </div>
   </form>
 </div>

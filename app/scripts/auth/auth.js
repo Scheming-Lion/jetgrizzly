@@ -52,18 +52,27 @@ module.controller('LoginController', function ($scope, SimpleLogin, $state, $sta
 
 module.controller('RegisterController', function ($scope, $state, SimpleLogin, $stateParams) {
   $scope.user = {};
+  $scope.success = true;
   $scope.registerUser = function() {
     SimpleLogin.createAccount($scope.user.email, $scope.user.password)
       .then(function(user) {
-        console.log($scope.user.email + ' registered!');
-
+        $scope.successfullyRegistered();
         $state.go('lobby', $stateParams, {
           reload: true
         });
       }, function(err) {
         // Provide real feedback to user
-        console.log('Email already taken!');
+        $scope.failedToRegister();
+        $scope.user.password = '';
       });
+  };
+
+  $scope.successfullyRegistered = function() {
+    $scope.success = true;
+  };
+
+  $scope.failedToRegister = function() {
+    $scope.success = false;
   };
 });
 module.controller('LogoutController', function (SimpleLogin, $state, $scope, $stateParams) {
