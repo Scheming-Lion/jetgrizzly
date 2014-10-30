@@ -7,7 +7,7 @@ module.config(function($stateProvider) {
   $stateProvider.state('account', {
     url:'/account',
     parent:'app',
-    templateUrl:'app/views/account/account.html',
+    templateUrl:'views/account/account.html',
     controller:function($scope, user) {
       $scope.user = user;
     }
