@@ -9,7 +9,6 @@ var module = angular.module('jetgrizzlyApp.Room', ['ui.router']).config(function
     controller: function ($scope, user, playerState) {
       $scope.user = user;
       $scope.currentRoom = $scope.$parent.currentRoom;
-      playerState.setRoom($scope.currentRoom);
     }
   });
 })
