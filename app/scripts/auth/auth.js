@@ -29,7 +29,6 @@ module.controller('LoginController', function ($scope, SimpleLogin, $state, $sta
   $scope.login = function() {
     SimpleLogin.login($scope.user.email, $scope.user.password)
       .then(function(user) {
-        console.log($scope.user.email + ' logged in!');
         $scope.successfullyLoggedIn();
         $state.go('lobby', $stateParams, {
           reload: true
