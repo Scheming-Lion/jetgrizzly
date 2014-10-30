@@ -36,7 +36,6 @@ module.controller('LoginController', function ($scope, SimpleLogin, $state, $sta
       }, function(err) {
         // Add real user feedback here.
         $scope.failedToLogin();
-        console.log('Wrong email or password!');
       });
   };
 
