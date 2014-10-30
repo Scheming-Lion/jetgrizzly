@@ -14,7 +14,7 @@
         <button class="submit btn btn-default" ng-click="addToQueue(item)">Add</button>
         <span class="error" ng-show="queueForm.vidInput.$error.minlength">This field is required</span>
         <br/>
-        <span class="error" ng-show="queueForm.vidInput.$error.pattern">Invalid YouTube URL</span>
+        <span class="error help-block" ng-show="queueForm.vidInput.$error.pattern">Invalid YouTube URL</span>
       </form>
 
       <div class="queueList">
