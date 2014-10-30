@@ -10,6 +10,8 @@
   - __Scrum Master__: Jose Merino
   - __Development Team Members__: Moxi Zhou, Jeff Gladchun
 
+
+
 ## Team 2
 
 - __Product Owner__: Justin Pinili
