@@ -30,19 +30,27 @@ module.controller('LoginController', function ($scope, SimpleLogin, $state, $sta
     SimpleLogin.login($scope.user.email, $scope.user.password)
       .then(function(user) {
         console.log($scope.user.email + ' logged in!');
+        $scope.successfullyLoggedIn();
         $state.go('lobby', $stateParams, {
           reload: true
         });
       }, function(err) {
         // Add real user feedback here.
         $scope.failedToLogin();
+        $scope.user.email = '';
+        $scope.user.password = '';
       });
+  };
+
+  $scope.successfullyLoggedIn = function() {
+    $scope.success = true;
   };
 
   $scope.failedToLogin = function() {
     $scope.success = false;
   };
 });
+
 module.controller('RegisterController', function ($scope, $state, SimpleLogin, $stateParams) {
   $scope.user = {};
   $scope.registerUser = function() {
