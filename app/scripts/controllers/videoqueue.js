@@ -55,6 +55,7 @@ angular.module('jetgrizzlyApp')
 
     $scope.downVote = function(index){
       var tempCount = $scope.queue[index].voteCount;
+      console.log(tempCount);
       --tempCount;
       console.log(tempCount);
       $scope.queue[index].voteCount = tempCount;
