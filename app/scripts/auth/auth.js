@@ -25,33 +25,54 @@ module.config(function ($stateProvider) {
 });
 module.controller('LoginController', function ($scope, SimpleLogin, $state, $stateParams) {
   $scope.user = {};
+  $scope.success = true;
   $scope.login = function() {
     SimpleLogin.login($scope.user.email, $scope.user.password)
       .then(function(user) {
-        console.log($scope.user.email + ' logged in!');
+        $scope.successfullyLoggedIn();
         $state.go('lobby', $stateParams, {
           reload: true
         });
       }, function(err) {
         // Add real user feedback here.
-        console.log('Wrong email or password!');
+        $scope.failedToLogin();
+        $scope.user.email = '';
+        $scope.user.password = '';
       });
   };
+
+  $scope.successfullyLoggedIn = function() {
+    $scope.success = true;
+  };
+
+  $scope.failedToLogin = function() {
+    $scope.success = false;
+  };
 });
+
 module.controller('RegisterController', function ($scope, $state, SimpleLogin, $stateParams) {
   $scope.user = {};
+  $scope.success = true;
   $scope.registerUser = function() {
     SimpleLogin.createAccount($scope.user.email, $scope.user.password)
       .then(function(user) {
-        console.log($scope.user.email + ' registered!');
-
+        $scope.successfullyRegistered();
         $state.go('lobby', $stateParams, {
           reload: true
         });
       }, function(err) {
         // Provide real feedback to user
-        console.log('Email already taken!');
+        $scope.failedToRegister();
+        $scope.user.password = '';
       });
+  };
+
+  $scope.successfullyRegistered = function() {
+    $scope.success = true;
+  };
+
+  $scope.failedToRegister = function() {
+    $scope.success = false;
   };
 });
 module.controller('LogoutController', function (SimpleLogin, $state, $scope, $stateParams) {
