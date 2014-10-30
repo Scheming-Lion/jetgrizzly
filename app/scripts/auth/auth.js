@@ -25,6 +25,7 @@ module.config(function ($stateProvider) {
 });
 module.controller('LoginController', function ($scope, SimpleLogin, $state, $stateParams) {
   $scope.user = {};
+  $scope.success = true;
   $scope.login = function() {
     SimpleLogin.login($scope.user.email, $scope.user.password)
       .then(function(user) {
@@ -34,8 +35,13 @@ module.controller('LoginController', function ($scope, SimpleLogin, $state, $sta
         });
       }, function(err) {
         // Add real user feedback here.
+        $scope.failedToLogin();
         console.log('Wrong email or password!');
       });
+  };
+
+  $scope.failedToLogin = function() {
+    $scope.success = false;
   };
 });
 module.controller('RegisterController', function ($scope, $state, SimpleLogin, $stateParams) {
