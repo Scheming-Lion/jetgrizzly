@@ -64,17 +64,9 @@ var handleNextQueueItem = function(queueSnapshot){
     var nextID = queueSnapshot.val().item.split('v=')[1];
     console.log('nextID ', nextID);
     var nextName = queueSnapshot.name();
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     videoRef.set({currentVideo:nextID,isPlaying:true,startTime:Date.now()},function(){
       var remove = new Firebase(config.firebase.url+'/rooms/'+roomID+'/queue/'+nextName);
-=======
-=======
-    console.log('next name ', nextName);
->>>>>>> (FEAT) Voting working as expected, videos loading correctly.  Need to connect voting with the profiles & actual voting logic.
-    videoRef.set({currentVideo: nextID, isPlaying: true, startTime: Date.now()}, function(){
-      var remove = new Firebase(config.firebase.url+'/queue/'+nextName);
->>>>>>> (FEAT) If the queue is playing, loading next video.  Still need to play next video after video ends.
       remove.remove(function(){
         console.log('removed top vid from queue');
         // wait for this to end to finish looping.
@@ -112,11 +104,6 @@ var checkCurrentVideo = function(){
     console.log("Curent Video Line 74", currentVideo);  
 
     // if there is no video currently playing, we don't do anything
-<<<<<<< HEAD
-    if (currentVideo !== null) {
-      if(currentVideo.currentVideo === ""){
-        console.log('Video is nothing now');
-=======
     if(currentVideo.currentVideo === ""){
       console.log('Video is nothing now');
       queueRef.startAt().limit(1).once('child_added', handleNextQueueItem);
@@ -130,7 +117,6 @@ var checkCurrentVideo = function(){
 
       if(remaining < 0){
         // handle the next item on the queue if any
->>>>>>> (FEAT) If the queue is playing, loading next video.  Still need to play next video after video ends.
         queueRef.startAt().limit(1).once('child_added',handleNextQueueItem);
         return;
       }
