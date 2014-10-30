@@ -71,7 +71,7 @@ var handleNextQueueItem = function(queueSnapshot){
         console.log('removed top vid from queue');
         // wait for this to end to finish looping.
         stopped = false;
-        module.exports.checkCurrentVideo();
+        checkCurrentVideo();
       });
     });
   }
@@ -167,12 +167,6 @@ app.get('/:id', function(request, response) {
 
 app.get('/', function(request, response) {
   response.redirect('/lobby');
-});
-
-var server = require('http').createServer(app);
-// start server
-server.listen(port, ip, function () {
-  console.log('Express server listening on %d!', port);
 });
 
 // expose app
