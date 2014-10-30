@@ -9,7 +9,8 @@
   <form ng-submit="update(user.email, user.firstName, user.lastName, user.dinosaur, user.birthday, user.muffin, user.ssn, user.bitcoin)" roll='form'>
     <div class="row">
       <br/>
-      <h1>Welcome to your account page: {{user.email}}</h1>
+      <h1>Welcome to your account page: {{user.email}} </h1>
+      <h1>hello: {{data.email}}</h1>
       <br/>
       <label for="email">Nice to see you again!</label>
       <input type="email" class="form-control" ng-model="user.email" placeholder="Email">
