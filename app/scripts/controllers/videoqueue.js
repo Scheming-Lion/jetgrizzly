@@ -29,14 +29,38 @@ angular.module('jetgrizzlyApp')
     });
 
     $scope.addToQueue = function(item) {
-      console.log('Link added: '+item);
+      console.log('Link added: '+ item);
+      var item = { item: item, voteCount: 0 };
       $scope.queue.$add(item).then(function(){
         console.log('scope.item', $scope.item);
         $scope.item = '';
         $scope.queueForm.$setPristine();
-        console.log('Queue size: '+$scope.queue.length+'; Player is in state: '+$scope.playerState);
+        console.log('Queue size: '+$scope.queue.length+'; Player is in state: '+ $scope.playerState);
+        console.log('from line 35', item);
+        console.log('scope queue', $scope.queue)
       });
     };
+
+    $scope.upvote = function(index){
+      var tempCount = $scope.queue[index].voteCount;
+      ++tempCount;
+      console.log(tempCount);
+      $scope.queue[index].voteCount = tempCount;
+      $scope.queue.$save(index).then(function(){
+        console.log('upvote saved');
+      });
+    };
+
+    $scope.downVote = function(index){
+      var tempCount = $scope.queue[index].voteCount;
+      --tempCount;
+      console.log(tempCount);
+      $scope.queue[index].voteCount = tempCount;
+      $scope.queue.$save(index).then(function(){
+        console.log('downvote saved');
+      });
+    };
+
   }]);
 
 })();

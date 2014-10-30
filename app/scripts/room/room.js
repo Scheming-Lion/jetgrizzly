@@ -57,7 +57,7 @@ var module = angular.module('jetgrizzlyApp.Room', ['ui.router']).config(function
                 if (event.data === 0){ // Video has ended
                   if(playerState.getCurrentVideoId() !== lastVideo){
                     // firebase changed before our playback ended so we play it right away.
-                    lastVideo =playerState.getCurrentVideoId();
+                    lastVideo = playerState.getCurrentVideoId();
                     scope.player.loadVideoById(lastVideo);
                   }else{
                     // player must wait for next video from server

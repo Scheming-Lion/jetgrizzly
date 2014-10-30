@@ -17,7 +17,10 @@
 
       <div class="queueList">
         <ul class="queueList">
-          <li ng-repeat="item in queue">{{ $index + 1 }}. {{ item.$value }}</li>
+          <li ng-repeat="item in queue">{{ $index + 1 }}. {{ item.item }} <div>Votes: {{ item.voteCount }}</div>
+            <button ng-click="upvote($index)">Up Vote</button>
+            <button ng-click="downVote($index)">Down Vote</button>
+          </li>
         </ul>
       </div>
     </div>
