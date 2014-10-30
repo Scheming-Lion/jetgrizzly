@@ -1,3 +1,4 @@
+
 <header class="navbar navbar-inverse navbar-fixed-top">
   <a class="navbar-brand" ui-sref="lobby">Watch Together!</a>
   <ul class="nav navbar-nav">
@@ -6,8 +7,16 @@
     <li><a ui-sref="login" ng-show="!user">Log In</a></li>
     <li><a ui-sref="logout" ng-show="user">Log Out</a></li>
   </ul>
+
+  <a href="http://hackreactor.com">
+  <img z-index='1' style="position: fixed; top: 0; right: 0; border: 0;"
+  src="http://i.imgur.com/x86kKmF.png"
+  alt="Built at Hack Reactor">
+  </a>
 </header>
 <div id="maincontainer" ui-view></div>
 <div class="footer navbar navbar-inverse navbar-fixed-bottom">
   <p>Created with <span class="glyphicon glyphicon-heart"></span> by jetgrizzly & Scheming-Lion</p>
 </div>
+
+
