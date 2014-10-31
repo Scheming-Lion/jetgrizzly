@@ -44,10 +44,10 @@ module.factory('updateData', ['fbutil', '$timeout', '$window', '$rootScope', fun
         birthday: birthday,
         ssn: ssn,
       };
-      console.log(userEmail);
-      console.log(userData);
 
-      ref.update(userData, function() {console.log('success');});
+      ref.update(userData, function() {
+        //provide user feed back for successful data update
+      });
     }
   };
   return functions;

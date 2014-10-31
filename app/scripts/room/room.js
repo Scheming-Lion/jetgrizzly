@@ -55,21 +55,13 @@ var module = angular.module('jetgrizzlyApp.Room', ['ui.router']).config(function
             events: {
               'onStateChange': function(event){
                 if (event.data === 0){ // Video has ended
-                  console.log('video ended');
-                  console.log(playerState.getCurrentVideoId());
-                  console.log(lastVideo);
                   if(playerState.getCurrentVideoId() !== lastVideo){
                     // firebase changed before our playback ended so we play it right away.
-                    console.log('not equal');
                     lastVideo = playerState.getCurrentVideoId();
                     scope.player.loadVideoById(lastVideo);
                   } else {
-                    console.log('equal');
                     // player must wait for next video from server
-                    console.log(playerState.getNextVideo());
-
                     playerState.getNextVideo().then(function(nextVideo){
-                      console.log(nextVideo);
                       // video wait ended and new video is loaded
                       lastVideo = nextVideo.currentVideo;
                       scope.player.loadVideoById(lastVideo);
@@ -87,8 +79,6 @@ var module = angular.module('jetgrizzlyApp.Room', ['ui.router']).config(function
                 } else if (event.data === 3) { 
                 // video is buffering
                 
-                } else {
-                  console.log(event.data);
                 }
               }
             }

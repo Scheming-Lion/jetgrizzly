@@ -4,7 +4,6 @@ var module = angular.module('jetgrizzlyApp.chat', ['firebase.utils', 'firebase']
 	module.controller('ChatController', ['fbutil', '$scope', '$window', '$firebase', '$location', '$anchorScroll', function(fbutil, $scope, $window, $firebase, $location, $anchorScroll) {
 
     var currentRoom = $scope.$parent.currentRoom;
-    // console.log(currentRoom);
     var limit = fbutil.ref2('/rooms/'+currentRoom+'/messages').limit(30);
 
     // create an AngularFire reference to the data and download the data into a local object
