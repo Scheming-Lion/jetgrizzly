@@ -22,7 +22,7 @@ angular.module('jetgrizzlyApp', [
   $urlRouterProvider.otherwise('/');
   $stateProvider.state('app',{
     abstract:true,
-    templateUrl:'app/views/main.html',
+    templateUrl:'views/main.html',
     resolve: {
       user : function(SimpleLogin){
         return SimpleLogin.getUser();

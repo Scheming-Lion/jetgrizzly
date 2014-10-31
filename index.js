@@ -11,11 +11,6 @@ var youtubeData = 'http://gdata.youtube.com/feeds/api/videos/';
 var youtubeQueryParams = '?v=2&alt=jsonc';
 
 
-var server = require('http').createServer(app);
-// start server
-server.listen(port, ip, function () {
-  console.log('Express server listening on %d!', port);
-});  
 
 ////////////////////////////////////////////
 // NEED TO CHANGE THIS DATABASE LINK HERE 
@@ -27,8 +22,8 @@ server.listen(port, ip, function () {
 
 
 var config = {firebase:{url:'https://scheming-lions.firebaseio.com'}};
-var queueRef = new Firebase(config.firebase.url+'/queue/');
-var videoRef = new Firebase(config.firebase.url+'/youTube/');
+var queueRef = new Firebase(config.firebase.url+'/rooms/<%= currentRoom %>/queue/');
+var videoRef = new Firebase(config.firebase.url+'/rooms/<%= currentRoom %>/youTube/');
 
 var getVideoData = function(video, cb){
   http.get(youtubeData + video + youtubeQueryParams, function(res){
@@ -47,12 +42,8 @@ var getVideoData = function(video, cb){
 };
 
 var stopped = true;
-var roomID;
+var roomID = '<%= currentRoom %>';
 
-<<<<<<< HEAD:index.js
-=======
-// LOOK HERE!!!!
->>>>>>> (feat) queue resumes with next video on deck.:database/database.js
 var handleNextQueueItem = function(queueSnapshot){
   console.log('The value of the queue is');
   var queue = queueSnapshot.val();
@@ -81,11 +72,7 @@ var handleNextQueueItem = function(queueSnapshot){
   }
 };
 
-<<<<<<< HEAD:index.js
 var updateQueueWatcher = function(id) {
-=======
-module.exports.updateQueueWatcher = function(id) {
->>>>>>> (feat) queue resumes with next video on deck.:database/database.js
   roomID = id;
 
   queueRef = new Firebase(config.firebase.url+'/rooms/'+id+'/queue/');
@@ -164,25 +151,8 @@ app.set('views', __dirname + '/client');
 
 app.use(express.static(__dirname + '/client'));
 
-<<<<<<< HEAD
-=======
 app.get('/:id', function(request, response) {
-  // console.log("id: " + request.params.id);
-
-  job.updateQueueWatcher(request.params.id);
-  job.checkCurrentVideo();
-
-  response.render('index', { currentRoom: request.params.id });
-});
-
-
->>>>>>> (feat) logic to handle rooms in place.
-app.get('/', function(request, response) {
-  response.redirect('/lobby');
-});
-
-app.get('/:id', function(request, response) {
-  // console.log("id: " + request.params.id);
+  console.log("id: " + request.params.id);
 
   updateQueueWatcher(request.params.id);
   checkCurrentVideo();
@@ -190,6 +160,12 @@ app.get('/:id', function(request, response) {
   response.render('index', { currentRoom: request.params.id });
 });
 
+var server = require('http').createServer(app);
+// start server
+server.listen(port, ip, function () {
+  console.log('Express server listening on %d!', port);
+  checkCurrentVideo();
+});
 
 // expose app
 exports = module.exports = app;
