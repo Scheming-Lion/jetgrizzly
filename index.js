@@ -96,45 +96,53 @@ var checkCurrentVideo = function(){
 
     // get the current video with its starting time
     var currentVideo = snapshot.val();
-    console.log("Curent Video Line 74", currentVideo);  
+    console.log("Curent Video Line 74", currentVideo);
 
-    // if there is no video currently playing, we don't do anything
-    if(currentVideo.currentVideo === ""){
-      console.log('Video is nothing now');
-      queueRef.startAt().limit(1).once('child_added', handleNextQueueItem);
-      return;
-    }
+    if (currentVideo === null) {
+      var newYouTubeRef = videoRef.$asObject();
+      newYouTubeRef.currentVideo = '';
+      newYouTubeRef.isPlaying = false;
+      newYouTubeRef.startTime = -1;
+      newYouTubeRef.$save();
 
-    // get the video data
-    getVideoData(currentVideo.currentVideo, function(res){
-      var endTime = currentVideo.startTime+res.data.duration*1000;
-      var remaining = endTime - Date.now();
-
-//test
-//helllooooo
-      if(remaining < 0){
-        // handle the next item on the queue if any
-        queueRef.startAt().limit(1).once('child_added',handleNextQueueItem);
+      checkCurrentVideo();
+    } else {
+      // if there is no video currently playing, we don't do anything
+      if(currentVideo.currentVideo === ""){
+        console.log('Video is nothing now');
+        queueRef.startAt().limit(1).once('child_added', handleNextQueueItem);
         return;
       }
 
       // get the video data
-      getVideoData(currentVideo.currentVideo,function(res){
+      getVideoData(currentVideo.currentVideo, function(res){
         var endTime = currentVideo.startTime+res.data.duration*1000;
         var remaining = endTime - Date.now();
-
-        console.log('remaning time:  ' + remaining);
 
         if(remaining < 0){
           // handle the next item on the queue if any
           queueRef.startAt().limit(1).once('child_added',handleNextQueueItem);
-        } else {
-          // this video is fine. Wait and check again once the remaining time is done
-          stopped = false;
-          setTimeout(checkCurrentVideo,remaining);
+          return;
         }
+
+        // get the video data
+        getVideoData(currentVideo.currentVideo,function(res){
+          var endTime = currentVideo.startTime+res.data.duration*1000;
+          var remaining = endTime - Date.now();
+
+          console.log('remaning time:  ' + remaining);
+
+          if(remaining < 0){
+            // handle the next item on the queue if any
+            queueRef.startAt().limit(1).once('child_added',handleNextQueueItem);
+          } else {
+            // this video is fine. Wait and check again once the remaining time is done
+            stopped = false;
+            setTimeout(checkCurrentVideo,remaining);
+          }
+        });
       });
-    });
+    }
   }, function (errorObject) {
     console.log('The read failed: ' + errorObject.code);
   });
