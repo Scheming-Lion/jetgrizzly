@@ -21,6 +21,10 @@ angular.module('jetgrizzlyApp')
     var sync = $firebase(queueRef);
     $scope.queue = sync.$asArray();
 
+    var currentVideoRef = new $window.Firebase(config.firebase.url+'/youTube/');
+    var syncCurrentVideo = $firebase(currentVideoRef);
+    $scope.currentVideo = syncCurrentVideo.$asObject();
+
     // listen for new users to lobby (emitted from UserPresenceFactory)
     $scope.$on('onOnlineUser', function() {
       $scope.$apply(function() {
@@ -29,14 +33,37 @@ angular.module('jetgrizzlyApp')
     });
 
     $scope.addToQueue = function(item) {
-      console.log('Link added: '+item);
+      console.log('Link added: '+ item);
+      var item = { item: item, voteCount: 0 };
       $scope.queue.$add(item).then(function(){
         console.log('scope.item', $scope.item);
         $scope.item = '';
         $scope.queueForm.$setPristine();
-        console.log('Queue size: '+$scope.queue.length+'; Player is in state: '+$scope.playerState);
+        console.log('your video has been added to the queue');
       });
     };
+
+    $scope.upvote = function(index){
+      var tempCount = $scope.queue[index].voteCount;
+      ++tempCount;
+      console.log(tempCount);
+      $scope.queue[index].voteCount = tempCount;
+      $scope.queue.$save(index).then(function(){
+        console.log('upvote saved');
+      });
+    };
+
+    $scope.downVote = function(index){
+      var tempCount = $scope.queue[index].voteCount;
+      console.log(tempCount);
+      --tempCount;
+      console.log(tempCount);
+      $scope.queue[index].voteCount = tempCount;
+      $scope.queue.$save(index).then(function(){
+        console.log('downvote saved');
+      });
+    };
+
   }]);
 
 })();

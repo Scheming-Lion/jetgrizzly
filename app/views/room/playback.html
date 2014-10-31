@@ -5,19 +5,23 @@
     </div>
     <div class="playback" ng-controller="PlayerController">
       <youtube width="{{yt.width}}" height="{{yt.height}}" videoid="{{yt.videoid}}"></youtube>
+      <!-- <div>{{ $scope.queue[index].voteCount }}<div> -->
     </div>
   
     <div class="queue">
       <form name="queueForm">
         <input type="text" ng-model="item" ng-minlength="6" ng-pattern="/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/" class="queueInput" name="vidInput" placeholder="Enter a Youtube URL Here">
         <button class="submit btn btn-default" ng-click="addToQueue(item)">Add</button>
-        <span class="error" ng-show="queueForm.vidInput.$error.minlength">This field is required</span>
+        <span class="error" ng-show="queueForm.vidInput.$error.minlength">This field is required</span><br/>
         <span class="error" ng-show="queueForm.vidInput.$error.pattern">URL Must be from Youtube</span>
       </form>
 
       <div class="queueList">
         <ul class="queueList">
-          <li ng-repeat="item in queue">{{ $index + 1 }}. {{ item.$value }}</li>
+          <li ng-repeat="item in queue">{{ $index + 1 }}. {{ item.item }} <div>Votes: {{ item.voteCount }}</div>
+            <button ng-click="upvote($index)" class='btn btn-default'>Up Vote</button>
+            <button ng-click="downVote($index)" class='btn btn-default'>Down Vote</button>
+          </li>
         </ul>
       </div>
     </div>
