@@ -54,4 +54,15 @@ angular.module('jetgrizzlyApp', [
       return room;
     }
   };
+})
+.factory('userRoom', function() {
+  var room = '';
+  return {
+    setRoom: function(newRoom) {
+      room = newRoom;
+    },
+    getRoom: function() {
+      return room;
+    }
+  };
 });
