@@ -67,9 +67,16 @@ angular.module('jetgrizzlyApp')
       --tempCount;
       console.log(tempCount);
       $scope.queue[index].voteCount = tempCount;
-      $scope.queue.$save(index).then(function(){
-        console.log('downvote saved');
+
+
+      $scope.queue.sort(function(a,b) {
+        return b.voteCount > a.voteCount;
+      })
+      console.log($scope.queue);
+      $scope.queue.$save().then(function(){
+        console.log('saved');
       });
+      
     };
 
   }]);
