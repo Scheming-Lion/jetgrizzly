@@ -15,7 +15,6 @@ angular.module('jetgrizzlyApp')
     var currentRoom = $scope.$parent.room;
 
     var currentRoom = $scope.$parent.currentRoom;
-    // console.log(currentRoom);
     
     var queueRef = new $window.Firebase(config.firebase.url+'/rooms/'+currentRoom+'/queue/');
 
@@ -34,35 +33,25 @@ angular.module('jetgrizzlyApp')
     });
 
     $scope.addToQueue = function(item) {
-      console.log('Link added: '+ item);
       var item = { item: item, voteCount: 0 };
       $scope.queue.$add(item).then(function(){
-        console.log('scope.item', $scope.item);
         $scope.item = '';
         $scope.queueForm.$setPristine();
-        console.log('your video has been added to the queue');
       });
     };
 
     $scope.upvote = function(index){
       var tempCount = $scope.queue[index].voteCount;
       ++tempCount;
-      console.log(tempCount);
       $scope.queue[index].voteCount = tempCount;
-      $scope.queue.$save(index).then(function(){
-        console.log('upvote saved');
-      });
+      $scope.queue.$save(index);
     };
 
     $scope.downVote = function(index){
       var tempCount = $scope.queue[index].voteCount;
-      console.log(tempCount);
       --tempCount;
-      console.log(tempCount);
       $scope.queue[index].voteCount = tempCount;
-      $scope.queue.$save(index).then(function(){
-        console.log('downvote saved');
-      });
+      $scope.queue.$save(index);
     };
 
   }]);

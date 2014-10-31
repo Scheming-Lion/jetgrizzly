@@ -12,13 +12,10 @@ angular.module('jetgrizzlyApp')
   .factory('playerState', function (config, $window, $q, $firebase, userRoom) {
     
     var currentRoom = userRoom.getRoom();
-    console.log('current room: ' + currentRoom);
     var youtubeRef = new $window.Firebase(config.firebase.url+'/rooms/'+currentRoom+'/youTube');
     var currentVideoObject  = {isPlaying:false,currentVideo:''};
     // video change is deferred so that player plays next when appropiate
     var deferredVideoChange = $q.defer();
-    console.log( deferredVideoChange );
-
 
     // listen to value changes on firebase to resolve the promise when video changes
     youtubeRef.on('value', function(snapshot){
