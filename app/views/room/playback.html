@@ -9,11 +9,11 @@
     </div>
   
     <div class="queue">
-      <form name="queueForm">
-        <input type="text" ng-model="item" ng-minlength="6" ng-pattern="/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/" class="queueInput" name="vidInput" placeholder="Enter a Youtube URL Here">
-        <button class="submit btn btn-default" ng-click="addToQueue(item)">Add</button>
-        <span class="error" ng-show="queueForm.vidInput.$error.minlength">This field is required</span><br/>
-        <span class="error" ng-show="queueForm.vidInput.$error.pattern">URL Must be from Youtube</span>
+      <form name="queueForm" novalidate>
+        <input type="text" ng-model="item" ng-minlength="6" ng-pattern="/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/" class="queueInput" name="vidInput" placeholder="Enter a Youtube URL Here" required>
+        <button class="submit btn btn-default" ng-disabled='queueForm.$invalid' ng-click="addToQueue(item)">Add</button>
+        <br/>
+        <span class="error help-block" ng-show="queueForm.vidInput.$error.pattern">Invalid YouTube URL</span>
       </form>
 
       <div class="queueList">
