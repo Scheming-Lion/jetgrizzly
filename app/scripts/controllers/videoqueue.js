@@ -52,7 +52,6 @@ angular.module('jetgrizzlyApp')
       --tempCount;
       $scope.queue[index].voteCount = tempCount;
       $scope.queue.$save(index);
-      });
     };
 
   }]);
