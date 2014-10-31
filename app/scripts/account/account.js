@@ -20,11 +20,14 @@ module.controller('AccountController', function ($scope, $firebase, user, update
   var ref = new Firebase('https://scheming-lions.firebaseio.com/users/' + userEmail);
   var sync = $firebase(ref);
   $scope.data = sync.$asObject();
-  $scope.email = $scope.data.email;
+
+
+
   $scope.user = user;
+
   $scope.user.firstName = ref.firstName || null;
-  $scope.update = function(email, firstName, lastName, dinosaur, bday, muffin, ssn, bitcoin) {
-    updateData.saveUserData(email, firstName, lastName, dinosaur, bday, muffin, ssn, bitcoin);
+  $scope.update = function(email, firstName, lastName, birthday, ssn) {
+    updateData.saveUserData(email, firstName, lastName, birthday, ssn);
   };
 
 });
@@ -32,17 +35,14 @@ module.controller('AccountController', function ($scope, $firebase, user, update
 module.factory('updateData', ['fbutil', '$timeout', '$window', '$rootScope', function (fbutil, $timeout, $window, $rootScope) {
   // methods that the controller is using
   var functions = {
-    saveUserData: function(email, firstName, lastName, dinosaur, bday, muffin, ssn, bitcoin) {
+    saveUserData: function(email, firstName, lastName, birthday, ssn) {
       var userEmail = email.replace(/@/g,'%40').replace(/\./g,''); //get rid of the .
       var ref = new $window.Firebase('https://scheming-lions.firebaseio.com/users/' + userEmail);
       var userData= {
         firstName: firstName,
         lastName: lastName,
-        dinosaur: dinosaur,
-        bday: bday,
-        muffin: muffin,
+        birthday: birthday,
         ssn: ssn,
-        bitcoin: bitcoin
       };
       console.log(userEmail);
       console.log(userData);

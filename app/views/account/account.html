@@ -6,42 +6,26 @@
 
 <div class="container text-center">
   <br/>
-  <form ng-submit="update(user.email, user.firstName, user.lastName, user.dinosaur, user.birthday, user.muffin, user.ssn, user.bitcoin)" roll='form'>
+  <h1 ng-show="data.firstName">hello, {{data.firstName}}! Nice to see you again<h1>
+  <form ng-submit="update(user.email, data.firstName, data.lastName, data.birthday, data.ssn)" roll='form'>
     <div class="row">
-      <br/>
-      <h1>Welcome to your account page: {{user.email}} </h1>
-      <h1>hello: {{data.email}}</h1>
-      <br/>
-      <label for="email">Nice to see you again!</label>
-      <input type="email" class="form-control" ng-model="user.email" placeholder="Email">
+      <input type="email" class="form-control" ng-model="user.email" placeholder="{{data.email}}">
     </div>
     <div class="row">
       <br/>
-      <input type="text" class="form-control" ng-model="user.firstName" placeholder="first name">
+      <input type="text" class="form-control" ng-model="data.firstName" placeholder="first Name">
     </div>
     <div class="row">
       <br/>
-      <input type="text" class="form-control" ng-model="user.lastName" placeholder="last name">
+      <input type="text" class="form-control" ng-model="data.lastName" placeholder="last name:">
     </div>
     <div class="row">
       <br/>
-      <input type="text" class="form-control" ng-model="user.dinosaur" placeholder="favorite dinosaur">
+      <input type="text" class="form-control" ng-model="data.birthday" placeholder="Birthday">
     </div>
     <div class="row">
       <br/>
-      <input type="text" class="form-control" ng-model="user.birthday" placeholder="Birthday">
-    </div>
-    <div class="row">
-      <br/>
-      <input type="text" class="form-control" ng-model="user.muffin" placeholder="Would you like your muffin buttered?">
-    </div>
-    <div class="row">
-      <br/>
-      <input type="text" class="form-control" ng-model="user.ssn" placeholder="Social Security #">
-    </div>
-    <div class="row">
-      <br/>
-      <input type="text" class="form-control" ng-model="user.bitcoin" placeholder="private bitcoin wallet address">
+      <input type="text" class="form-control" ng-model="data.ssn" placeholder="Social Security # ">
     </div>
     <div class="row">
       <br/>
