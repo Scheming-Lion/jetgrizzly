@@ -99,11 +99,16 @@ var checkCurrentVideo = function(){
     console.log("Curent Video Line 74", currentVideo);
 
     if (currentVideo === null) {
-      var newYouTubeRef = videoRef.$asObject();
-      newYouTubeRef.currentVideo = '';
-      newYouTubeRef.isPlaying = false;
-      newYouTubeRef.startTime = -1;
-      newYouTubeRef.$save();
+
+      videoRef.child('currentVideo').transaction(function() {
+        return '';
+      });
+      videoRef.child('isPlaying').transaction(function() {
+        return false;
+      });
+      videoRef.child('startTime').transaction(function() {
+        return -1;
+      });
 
       checkCurrentVideo();
     } else {
