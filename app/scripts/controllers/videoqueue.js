@@ -36,6 +36,7 @@ angular.module('jetgrizzlyApp')
     $scope.addToQueue = function(item) {
       console.log('Link added: '+ item);
       var item = { item: item, voteCount: 0 };
+
       $scope.queue.$add(item).then(function(){
         console.log('scope.item', $scope.item);
         $scope.item = '';
@@ -49,9 +50,15 @@ angular.module('jetgrizzlyApp')
       ++tempCount;
       console.log(tempCount);
       $scope.queue[index].voteCount = tempCount;
-      $scope.queue.$save(index).then(function(){
-        console.log('upvote saved');
+      $scope.queue.sort(function(a,b) {
+        return b.voteCount > a.voteCount;
+      })
+      console.log($scope.queue);
+      $scope.queue.$save().then(function(){
+        console.log('saved');
       });
+
+
     };
 
     $scope.downVote = function(index){
@@ -60,9 +67,16 @@ angular.module('jetgrizzlyApp')
       --tempCount;
       console.log(tempCount);
       $scope.queue[index].voteCount = tempCount;
-      $scope.queue.$save(index).then(function(){
-        console.log('downvote saved');
+
+
+      $scope.queue.sort(function(a,b) {
+        return b.voteCount > a.voteCount;
+      })
+      console.log($scope.queue);
+      $scope.queue.$save().then(function(){
+        console.log('saved');
       });
+      
     };
 
   }]);
