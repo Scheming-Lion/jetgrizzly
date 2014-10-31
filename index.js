@@ -110,6 +110,7 @@ var checkCurrentVideo = function(){
       var endTime = currentVideo.startTime+res.data.duration*1000;
       var remaining = endTime - Date.now();
 
+//test
       if(remaining < 0){
         // handle the next item on the queue if any
         queueRef.startAt().limit(1).once('child_added',handleNextQueueItem);
