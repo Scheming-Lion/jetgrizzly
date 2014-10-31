@@ -8,13 +8,13 @@ module.config(function ($stateProvider) {
   $stateProvider.state('login', {
     url: '/login',
     parent: 'app',
-    templateUrl: 'app/views/auth/login.html',
+    templateUrl: 'views/auth/login.html',
     controller: 'LoginController'
   });
   $stateProvider.state('register', {
     url: '/register',
     parent: 'app',
-    templateUrl: 'app/views/auth/register.html',
+    templateUrl: 'views/auth/register.html',
     controller: 'RegisterController'
   });
   $stateProvider.state('logout', {
